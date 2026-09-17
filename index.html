@@ -1,14 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>LoggerDaisy Stats</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.31.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/6.1.0/echarts-en.min.js"></script>
-</head>
-<body>
-<div id="chart" style="width:800px; height:600px;"></div>
-<script src="js/app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08131f" />
+    <meta name="description" content="A small, modern ECharts dashboard for exploring synthetic sensor data." />
+    <title>Signal — telemetry lab</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="page-header">
+        <a class="brand" href="/" aria-label="Signal home">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>signal<span class="brand-dot">.</span></span>
+        </a>
+        <div class="header-meta"><span class="status-dot" aria-hidden="true"></span><span>Live synthetic feed</span></div>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Telemetry lab / 01</p>
+        <h1 id="page-title">See the signal<br /><em>inside the noise.</em></h1>
+        <p class="hero-copy">Explore a responsive confidence-band chart built from generated sensor readings. Change the window, refresh the sample, and inspect the trend.</p>
+      </section>
+
+      <section class="controls-panel" aria-label="Chart controls">
+        <div class="control-group">
+          <span class="control-label" id="window-label">Time window</span>
+          <div class="segmented-control" role="group" aria-labelledby="window-label">
+            <button class="segment" data-days="30" type="button">30 days</button>
+            <button class="segment is-active" data-days="90" type="button">90 days</button>
+            <button class="segment" data-days="365" type="button">1 year</button>
+          </div>
+        </div>
+        <button class="refresh-button" id="refresh-button" type="button"><span class="refresh-icon" aria-hidden="true">↻</span><span>New sample</span></button>
+      </section>
+
+      <section class="stats-grid" aria-label="Summary statistics">
+        <article class="stat-card stat-card-featured"><div class="stat-heading"><span>Latest reading</span><span class="stat-symbol">↗</span></div><strong class="stat-value" id="latest-value">—</strong><span class="stat-detail" id="latest-date">—</span></article>
+        <article class="stat-card"><div class="stat-heading"><span>Average</span><span class="stat-symbol">∿</span></div><strong class="stat-value" id="average-value">—</strong><span class="stat-detail">Across selected window</span></article>
+        <article class="stat-card"><div class="stat-heading"><span>Observed range</span><span class="stat-symbol">↕</span></div><strong class="stat-value" id="range-value">—</strong><span class="stat-detail" id="range-detail">—</span></article>
+        <article class="stat-card"><div class="stat-heading"><span>Volatility</span><span class="stat-symbol">≈</span></div><strong class="stat-value" id="volatility-value">—</strong><span class="stat-detail">Standard deviation</span></article>
+      </section>
+
+      <section class="chart-card" aria-labelledby="chart-title">
+        <div class="chart-header">
+          <div><p class="eyebrow">Synthetic sensor / stream 01</p><h2 id="chart-title">Readings over time</h2></div>
+          <div class="chart-badge"><span class="pulse-dot" aria-hidden="true"></span><span id="sample-size">90 points</span></div>
+        </div>
+        <div id="chart" role="img" aria-label="Line chart of generated sensor readings with a confidence band"></div>
+        <div class="chart-footer"><div class="legend" aria-label="Chart legend"><span><i class="legend-line legend-line-main"></i>Reading</span><span><i class="legend-band"></i>Confidence band</span></div><span class="chart-hint">Drag to zoom · Scroll to explore</span></div>
+      </section>
+
+      <footer class="page-footer"><span>Generated locally in your browser</span><span class="footer-divider" aria-hidden="true"></span><span>Built with ECharts</span></footer>
+    </main>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
 </html>
